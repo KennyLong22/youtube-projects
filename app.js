@@ -1,10 +1,28 @@
-const colors = ["green", "red", "rgba(133,122,200)", "#f15025"];
+let counter = 0;
 
-const btn = document.querySelector('button');
-const span = document.querySelector('span');
-const body = document.body;
-btn.addEventListener('click', function() {
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    body.style.backgroundColor = color;
-    span.textContent = color;
+const value = document.querySelector('#value');
+const allBtns = document.querySelectorAll('.btn');
+
+allBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        const className = e.currentTarget.classList;
+        if (className.contains('decrease')) {
+            counter--;
+        } else if (className.contains('reset')) {
+            counter = 0;
+        } else if (className.contains('increase')) {
+            counter++;
+        }
+        value.textContent = counter;
+        if (counter < 0) {
+            value.style.color = 'red';
+        } else if (counter === 0) {
+            value.style.color = '#444';
+        } else if (counter > 0) {
+            value.style.color = 'green';
+        }
+    })
 })
+
+
+
